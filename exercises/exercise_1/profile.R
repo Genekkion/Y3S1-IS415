@@ -1,5 +1,5 @@
 source("./main.R")
 
 .First <- function() {
-    cat("main.R loaded.\n")
+    cat("\nmain.R loaded.\n\n")
 }
