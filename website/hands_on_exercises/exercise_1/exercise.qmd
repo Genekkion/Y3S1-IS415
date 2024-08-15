@@ -3,7 +3,7 @@ title: "Hands-On Exercise 1"
 description: "Geospatial Data Science with R"
 author: "Oh Sheow Woon"
 date-modified: last-modified
-# date: "08/14/2024"
+date: "08/14/2024"
 categories:
   - hands_on_exercise
 ---
