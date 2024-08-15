@@ -8,6 +8,13 @@ import (
 	"github.com/joho/godotenv"
 )
 
+func logHandlerWrapper(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		next.ServeHTTP(w, r)
+		log.Printf("%s %s", r.Method, r.RequestURI)
+	})
+}
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {
@@ -22,7 +29,10 @@ func main() {
 	}
 
 	fileServer := http.FileServer(http.Dir(directory))
-	http.Handle("/", http.StripPrefix("/", fileServer))
+	handler := http.StripPrefix("/", fileServer)
+	loggedHandler := logHandlerWrapper(handler)
+
+	// http.Handle("/", http.StripPrefix("/", fileServer))
 
 	log.Println("Serving files from", directory)
 
@@ -36,5 +46,5 @@ func main() {
 	}
 
 	log.Println("Starting server at: http://" + hostName + ":" + port)
-	log.Fatal(http.ListenAndServe(hostName+":"+port, nil))
+	log.Fatal(http.ListenAndServe(hostName+":"+port, loggedHandler))
 }

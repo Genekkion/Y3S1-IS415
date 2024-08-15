@@ -1,7 +1,17 @@
 ---
-title: "website"
+title: "IS415-GAA"
+
+listing: default
+  # contents: posts
+  # sort: "date desc"
+  # type: default
+  # categories: true
+  #
+  # feed:
+  #   items: 10
 ---
 
-This is a Quarto website.
+Welcome to **IS415 Geospatial Analytics and Applications**.
+In this website, you will find my coursework prepared
+for this course.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

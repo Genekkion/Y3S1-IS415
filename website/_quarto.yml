@@ -5,19 +5,36 @@ project:
     port: 4415
     browser: false
 
+
 website:
-  title: "website"
+  title: "IS415-GAA - swoh"
+  site-url: https://is415.swoh.dev
+  
+
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: "Hands-On Exercises"
+        menu:
+          - text: "Hands-On Exercise 1"
+            href: ./hands_on_exercises/exercise_1/exercise.qmd
+    
+      - text: "In-Class Exercises"
+
+      - text: "Take-Home Exercises"
+
+    right:
+      - text: "Home"
+        href: index.qmd
+
+      - text: "About"
+        href: ./about/about.qmd
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
     css: styles.css
     toc: true
+    number-sections: true
 
 
 

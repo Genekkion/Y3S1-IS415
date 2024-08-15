@@ -1,0 +1,20 @@
+---
+title: "About"
+image: swoh.jpg
+about:
+    template: jolla
+
+    links:
+      - text: "Github"
+        icon: github
+        href: https://github.com/Genekkion
+
+      - text: "LinkedIn"
+        icon: linkedin
+        href: https://www.linkedin.com/in/swoh
+
+---
+
+Hi! I am Sheow Woon, an undergraduate student at Singapore Management University,
+majoring in Computer Science. This website is developed to document my learning
+for course IS415: Geospatial Analytics and Applications.
