@@ -2,7 +2,7 @@
 title: "Hands-On Exercise 1"
 description: "Geospatial Data Science with R"
 author: "Oh Sheow Woon"
-date-modified: last-modified
+date-modified: "08/15/2024"
 date: "08/15/2024"
 categories:
   - hands_on_exercise
@@ -289,7 +289,7 @@ find("list")
 list(listings)
 ```
 
-We can see that there are **4252** rows and **16** columns. The geospatial data can be
+We can see that there are **3540** rows and **18** columns. The geospatial data can be
 seen in the latitude and longitude columns. Notice that both columns are in the the
 decimal degree format, which we will assume to be data using the WGS84 geographic
 coordinate system.
