@@ -1,1 +1,1 @@
-Sitemap: https://is415.swoh.dev/sitemap.xml
+Sitemap: https://is415-swoh.netlify.app/sitemap.xml
