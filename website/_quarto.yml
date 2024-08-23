@@ -21,9 +21,9 @@ website:
             href: ./hands_on_exercises/exercise_2/exercise.qmd
     
       - text: "In-Class Exercises"
-        menu:
-          - text: "In-Class Exercise 1"
-            href: ./in_class_exercises/exercise_1/exercise.qmd
+        # menu:
+          # - text: "In-Class Exercise 1"
+          #   href: ./in_class_exercises/exercise_1/exercise.qmd
 
       - text: "Take-Home Exercises"
 

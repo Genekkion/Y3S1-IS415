@@ -2,8 +2,9 @@
 title: "In-Class Exercise 1"
 # description: "Geospatial Data Science with R"
 author: "Oh Sheow Woon"
-date: "08/18/2024"
+# date: "08/18/2024"
 date-modified: "last-modified"
+draft: true
 categories:
   - in_class_exercise
 

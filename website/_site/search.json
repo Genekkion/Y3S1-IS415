@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "in_class_exercises/exercise_1/exercise.html",
-    "href": "in_class_exercises/exercise_1/exercise.html",
-    "title": "In-Class Exercise 1",
-    "section": "",
-    "text": "1 Overview"
-  },
-  {
     "objectID": "hands_on_exercises/exercise_2/exercise.html",
     "href": "hands_on_exercises/exercise_2/exercise.html",
     "title": "Hands-On Exercise 2",
@@ -46,7 +39,7 @@
     "href": "index.html",
     "title": "IS415-GAA",
     "section": "",
-    "text": "Welcome to IS415 Geospatial Analytics and Applications. In this website, you will find my coursework prepared for this course.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAbout\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHands-On Exercise 1\n\n\n\n\n\nGeospatial Data Science with R\n\n\n\n\n\nAug 15, 2024\n\n\nOh Sheow Woon\n\n\n\n\n\n\n\n\n\n\n\n\nHands-On Exercise 2\n\n\n\n\n\nThematic Mapping and Geovisualisation with R\n\n\n\n\n\nAug 23, 2024\n\n\nOh Sheow Woon\n\n\n\n\n\n\n\n\n\n\n\n\nIn-Class Exercise 1\n\n\n\n\n\n\n\n\n\n\n\nAug 18, 2024\n\n\nOh Sheow Woon\n\n\n\n\n\n\nNo matching items"
+    "text": "Welcome to IS415 Geospatial Analytics and Applications. In this website, you will find my coursework prepared for this course.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAbout\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHands-On Exercise 1\n\n\n\n\n\nGeospatial Data Science with R\n\n\n\n\n\nAug 15, 2024\n\n\nOh Sheow Woon\n\n\n\n\n\n\n\n\n\n\n\n\nHands-On Exercise 2\n\n\n\n\n\nThematic Mapping and Geovisualisation with R\n\n\n\n\n\nAug 23, 2024\n\n\nOh Sheow Woon\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "hands_on_exercises/exercise_2/exercise.html#data-preparation",
@@ -236,5 +229,12 @@
     "title": "Hands-On Exercise 2",
     "section": "4.3 Data wrangling",
     "text": "4.3 Data wrangling\n\ndplyr\nTidy data\ntidyr: Easily Tidy Data with “spread()” and “gather()” Functions"
+  },
+  {
+    "objectID": "about/about.html",
+    "href": "about/about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi! I am Sheow Woon, an undergraduate student at Singapore Management University, majoring in Computer Science. This website is developed to document my learning for course IS415: Geospatial Analytics and Applications."
   }
 ]

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://is415-swoh.netlify.app/in_class_exercises/exercise_1/exercise.html</loc>
-    <lastmod>2024-08-23T09:02:38.621Z</lastmod>
-  </url>
-  <url>
     <loc>https://is415-swoh.netlify.app/hands_on_exercises/exercise_2/exercise.html</loc>
     <lastmod>2024-08-23T13:40:15.291Z</lastmod>
   </url>
@@ -15,5 +11,9 @@
   <url>
     <loc>https://is415-swoh.netlify.app/hands_on_exercises/exercise_1/exercise.html</loc>
     <lastmod>2024-08-23T09:02:38.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://is415-swoh.netlify.app/about/about.html</loc>
+    <lastmod>2024-08-23T09:02:38.614Z</lastmod>
   </url>
 </urlset>
