@@ -89,6 +89,7 @@ will be used, namely:
 Also note that <u>no extension</u> such as .shp, .dbf, .prj and .shx are needed.
 
 ```{R}
+find("st_read")
 master_plan_subzone_boundary <- st_read(
   dsn = "data/geospatial", 
   layer = "MP14_SUBZONE_WEB_PL"

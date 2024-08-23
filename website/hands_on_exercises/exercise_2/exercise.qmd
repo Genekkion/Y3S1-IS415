@@ -1,0 +1,110 @@
+---
+title: "Hands-On Exercise 2"
+description: "Thematic Mapping and Geovisualisation with R"
+author: "Oh Sheow Woon"
+date: "08/23/2024"
+date-modified: "last-modified"
+categories:
+  - hands_on_exercise
+
+execute:
+  eval: true
+  echo: true
+  freeze: true
+
+---
+
+# Overview
+
+Thematic mapping is the process of visualising the properties of
+geographic features through the use of map symbols. These properties
+may not be naturally visible, such as population, temperature,
+crime rate, and property prices. As such, thematic mapping helps to
+visualise them better.
+
+When exploring geographical data, we often use visual techniques
+to explore and interpret the data. Geovisualisation enables us
+to visualise the data better.
+
+## Tools
+
+In this exercise, the main objective will be to plot functional and
+turthful choropleth maps, primarily using the `tmap` package. Apart
+from `tmap`, the following R packages will also be used:
+
+- `readr` for importing of delimited text files
+- `tidyr` for tidying of data
+- `dplyr` for wrangling of data
+- `sf` for handling of geospatial data
+
+
+The packages can be installed and loaded via `pacman` as shown below.
+
+```{R}
+pacman::p_load(sf, tmap, tidyverse)
+```
+
+<u>Note:</u> `readr`, `tidyr`, `dplyr` can be found in the `tidyverse` package.
+Loading the `tidyverse` package automatically loads the other relevant packages.
+
+# Data preparation
+
+## Data acquisition
+
+Two datasets will be utilised in this exercise:
+
+- Master Plan 2014 Subzone Boundary (Web) (`MP14_SUBZONE_WEB_PL`), which is in the
+ESRI shapefile format. It contains geospatial data of the geographical boundary of
+Singapore at the planning subzone level, based on the URA Master Plan 2014. It
+can be downloaded from [data.gov.sg](https://data.gov.sg/).
+
+- Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of
+Dwelling for June 2011-2020 (`respopagesextod2011to2020.csv`), which is in the csv format.
+It contains aspatial data, including the `PA` and `SZ` fields which act as unique
+identifiers to geocode in the `MP14_SUBZONE_WEB_PL` shapefile. It can be downloaded
+from the [Department of Statistics, Singapore](https://www.singstat.gov.sg/).
+
+## Importing of geospatial data
+
+As per the previous exercise, we will be using the `sf` package for importing of
+the geospatial data.
+
+```{R}
+master_plan_subzone_boundary <- st_read(
+  dsn = "data/geospatial", 
+  layer = "MP14_SUBZONE_WEB_PL"
+)
+```
+
+We can examine the contents by calling the variable name itself.
+
+```{R}
+master_plan_subzone_boundary
+```
+
+<u>Note:</u> if we want to see all rows, we can define the row limit
+as such.
+
+```{R}
+# print(master_plan_subzone_boundary, n  = Inf)
+```
+
+## Importing of aspatial data
+
+Likewise, for aspatial data, we will be using the `readr` package for importing.
+
+```{R}
+find("read_csv")
+population_data <- read_csv(
+  "data/aspatial/respopagesextod2011to2020.csv",
+)
+```
+
+
+
+
+
+
+
+
+

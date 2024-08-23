@@ -17,6 +17,8 @@ website:
         menu:
           - text: "Hands-On Exercise 1"
             href: ./hands_on_exercises/exercise_1/exercise.qmd
+          - text: "Hands-On Exercise 2"
+            href: ./hands_on_exercises/exercise_2/exercise.qmd
     
       - text: "In-Class Exercises"
         menu:
