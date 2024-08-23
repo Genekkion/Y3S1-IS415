@@ -47,7 +47,7 @@ pacman::p_load(sf, tmap, tidyverse)
 <u>Note:</u> `readr`, `tidyr`, `dplyr` can be found in the `tidyverse` package.
 Loading the `tidyverse` package automatically loads the other relevant packages.
 
-# Data preparation
+# Data
 
 ## Data acquisition
 
@@ -100,11 +100,740 @@ population_data <- read_csv(
 )
 ```
 
+## Data preparation
+
+Before we can prepare a thematic map, we will need to prepare a data table for
+the year of choice. In this case, we will be preparing the map for the year 2020.
+The data table will include the variables:
+
+- `PA`: geocode identifier
+- `SZ`: geocode identifier
+- `YOUNG`: contains age groups of 0 to 4, until age groups of 20 to 24
+- `ECONOMY_ACTIVE`: contains age groups of 25 to 29, until age groups of 60 to 64
+- `AGED`: contains age groups of 65 and above
+- `TOTAL`: all age groups
+- `DEPENDENCY`: the ratio between the `YOUNG` and `AGED` against the `ECONOMY_ACTIVE` group
 
 
+## Data wrangling
+
+In this section, we will be performing data wrangling and transforming the data
+using functions from the `tidyr` and `dplyr` package.
+
+```{R}
+find("pivot_wider")
+find("mutate")
+find("filter")
+find("group_by")
+find("select")
+population_data_2020 <- population_data %>%
+  # Filter by field of "Time" for the year 2020
+  filter(`Time` == 2020) %>%
+
+  # Groups up all entries with the same PA, SZ which are geocode identifiers and AG, the age group
+  group_by(`PA`, `SZ`, `AG`) %>%
+
+  # Summarise allows for calculation of statistics for the entire group
+  # Used here to find the total population for a group
+  summarise(`GROUP_POP` = sum(`Pop`)) %>%
+
+  # Removes the grouping, leaving the GROUP_POP field still tagged on to each entry
+  ungroup() %>%
+
+  # Collects the entries with the same AG field and combine their GROUP_POP values
+  pivot_wider(
+    names_from = `AG`,
+    values_from = `GROUP_POP`
+  ) %>%
+
+  # Create the YOUNG field to sum up the values from the appropriate age groups
+  #   between 0 - 24
+  mutate(
+
+    # The columns from column 3 to 19 represent the different age groups
+    # We use rowSums to sum the values across selected columns
+    # WARN: unlike many other programming languages, R is one-indexed, not zero-indexed
+    # WARN: the age group in the columns have been sorted lexigraphically, hence the need
+    #       to add the the additional 14th column
+
+    `YOUNG` = 
+      rowSums(.[3:6]) +
+      rowSums(.[14])
+  ) %>%
+
+  # Create the ECONOMY_ACTIVE field for age groups between 25 - 64
+  mutate(
+    `ECONOMY_ACTIVE` = 
+      rowSums(.[7:13]) +
+      rowSums(.[15])
+  ) %>%
+  
+  # Likewise create for AGED
+  mutate(
+    `AGED` = rowSums(.[16:22])
+  ) %>%
+
+  # Sum up all age group data
+  mutate(
+    `TOTAL` = rowSums(.[3:22])
+  ) %>%
+
+  # Calculate dependency as explained above
+  mutate(
+    `DEPENDENCY` = (`YOUNG` + `AGED`) / `ECONOMY_ACTIVE`
+  ) %>%
+
+  # View selected fields
+  select(
+    `PA`, `SZ`, `YOUNG`,
+    `ECONOMY_ACTIVE`, `AGED`, `TOTAL`,
+    `DEPENDENCY`
+  )
+
+population_data_2020
+```
+
+### Joining geospatial and aspatial data
+
+As mentioned above, the `PA` and `SZ` fields from the aspatial
+data will act as geocode identifiers which correspond to that
+in the geospatial data. However, we will have to transform the values of
+the `PA` and `SZ` field into uppercase to match that of the geospatial data.
+
+```{R}
+population_data_2020 <- population_data_2020 %>%
+  # Alter the values using the specified function
+  mutate_at(
+    .vars = vars(`PA`, `SZ`),
+    .funs = list(toupper)
+  ) %>%
+
+  # Filter out to remove all entries without anyone in the `ECONOMY_ACTIVE`
+  #   group as it results in division by 0 -> NaN from the previous calculation
+  filter(
+    `ECONOMY_ACTIVE` > 0
+  )
+```
+
+We then perform the joining usin gthe `dplyr` package, using the `SUBZONE_N` from
+the geospatial data and `SZ` from the aspatial data to match.
+
+```{R}
+find("left_join")
+master_plan_subzone_population_2020 <- left_join(
+  master_plan_subzone_boundary,
+  population_data_2020,
+  by = c("SUBZONE_N" = "SZ")
+)
+```
+
+<u>Note:</u> a left join is performed, hence order matters to ensure that the resulting
+data contains all the subzones, with the added population data on top.
+
+We can then save the data into an rds file for reading from in the future.
+```{R}
+find("write_rds")
+write_rds(
+  master_plan_subzone_population_2020,
+  "data/rds/master_plan_subzone_population_2020.rds"
+)
+```
+
+# Choropleth mapping
+
+Now that we have all the necessary data prepared, we are ready to start mapping! Remember
+that choropleth mapping involves the symbolisation of enumeration units, such as countries,
+provinces, states, countires or census units, utilising area patterns or graduated colours.
+
+Using the `tmap` package, we have two choices:
+- `qtm`: for plotting of a thematic map quickly
+- Plotting a highly customisable thematic map using `tmap` elements
+
+## Quick plot
+
+The easiest and fastest method of plotting the map can be done using the `qtm` function
+from `tmap`. While it may not be as customisable, it gives a good default and requires
+not much configuration, making it useful for quick visualisations.
 
 
+<u>Note:</u> `tmap` can be set for either `plot` for static maps or `view` for
+interactive ones.
 
+<u>Note:</u> `qtm` accepts the `fill` argument to set the data to colour in.
 
+```{R}
+find("qtm")
+tmap_mode("plot")
 
+qtm(
+  master_plan_subzone_population_2020,
+  fill = "DEPENDENCY"
+)
+```
 
+## Custom maps
+
+While `qtm` is great for most cases, sometimes we want to draw some high quality
+maps and have more control over the properties. In order to do that, we can still
+utilise `tmap`'s capabilities.
+
+```{R}
+# The base, background plot
+tm_shape(master_plan_subzone_population_2020) +
+  
+  # Colour in the data
+  tm_fill(
+    "DEPENDENCY",
+    style = "quantile",
+    palette = "Blues",
+    title = "Dependency ratio"
+  ) +
+
+  # Set properties
+  tm_layout(
+    main.title = "Distribution of Dependency Ratio by planning subzone",
+    main.title.position = "center",
+    main.title.size = 1.2,
+
+    legend.height = 0.45,
+    legend.width = 0.35,
+    
+    frame = TRUE
+  ) +
+
+  # Add border
+  tm_borders(alpha = 0.5) +
+
+  # Add compass
+  tm_compass(
+    type = "8star",
+    size = 2
+  ) +
+
+  # Add scale
+  tm_scale_bar() +
+
+  # Add grid
+  tm_grid(alpha = 0.2) +
+
+  # Add credits
+  tm_credits(
+    "Source: Planning Sub-zone boundary from Urban Redevelopment Authority (URA)\n and population data from Department of Statistics (DOS)",
+    position = c("left", "bottom")
+  )
+```
+
+Usage of the `tmap` elements above will be explained below.
+
+### Base map
+
+`tm_shape` is used to define the input data, while
+`tm_polygon` is used to draw the planning subzone polygons. It does not plot out a specific
+field in the data but rather, the entire area it consists of.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  tm_polygons()
+```
+
+### Simple plot
+
+If we want to just plot a field, we can also do so by adding it within the `tm_polygon` function.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  tm_polygons("DEPENDENCY")
+```
+
+The default interval binning used in `tm_polygons` is called "pretty". It utilises the colour scheme
+of `Y10rRd` of ColorBrewer. By default, missing values will be shaded grey.
+
+### Fill & border
+
+Under the hood, `tm_polygons` is a wrapper for the `tm_fill` and `tm_border.tm_fill`
+functions. `tm_fill` is used to colour in the polygons while `tm_border` applies the borders
+of the shapefile onto the map.
+
+Using `tm_fill` alone, we get the following map.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  tm_fill("DEPENDENCY")
+```
+
+<u>Note:</u> as shown in the map, the lack of borders will result in no distinction between
+subzones.
+
+With the addition of `tm_borders`, we can demarcate the borders of each subzone clearly.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  tm_fill("DEPENDENCY") +
+  tm_borders(
+
+    # Line width
+    lwd = 0.5,
+
+    # Colour transparency
+    alpha = 1
+  )
+```
+
+<u>Note:</u> `tm_borders` accepts a total of 4 arguments:
+
+- `alpha`: transparency
+- `col`: colour
+- `lwd`: line width
+- `lty`: line type
+
+## Data classification
+
+In most cases, we will want to be able to group the data into certain groups
+based on the range of data.
+
+`tmap` offers a total of 10 data classification methods: `pretty` (default), `fixed`,
+`sd`, `equal`, `quantile`, `kmeans`, `hclust`, `bclust`, `fisher`, and `jenks`.
+
+### Built-in classification methods
+
+By default there are some built-in classification methods available for use directly.
+
+The first one is `quantile` which splits according to equal-sized intervals (same
+number of data points in each interval).
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+
+  tm_fill(
+    "DEPENDENCY",
+    style = "quantile",
+
+    # Split into 5 classes
+    n = 5
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+Using the `equal` splits the data into equally-ranged intervals.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+
+  tm_fill(
+    "DEPENDENCY",
+    style = "equal",
+    n = 5
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+Notice that we can see a stark difference between both maps, showing the
+difference in how classification methods can heavily affect the visuals of the
+map. This serves as a good reminder that we should not base our findings directly
+from how maps appear as there are several factors which can affect it greatly.
+
+For example, the map below uses a different number of classes and yet shows similar
+contrasts in its output between the `equal` and `pretty` style.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+
+  tm_fill(
+    "DEPENDENCY",
+    style = "pretty",
+    n = 10
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+## Custom breaks
+
+Instead of using the built-in breakpoints, we can also define the breakpoints
+explicitly.
+
+<u>Note:</u> `tmap` breaks include a minimum and maximum. Hence, for `n` categories,
+`n + 1` elements must be specified in the `breaks` parameter.
+
+Before we begin, we should take a look at the data to decide on where we want to
+set our breakpoints.
+
+```{R}
+summary(master_plan_subzone_population_2020$DEPENDENCY)
+```
+
+Based on the results above, let's say we set the breakpoints at 0.15 intervals between
+0.6 and 1.2. We will also include a minimum and maximum of 0 and 1.3 respectively.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+
+  tm_fill(
+    "DEPENDENCY",
+    breaks = c(0, 0.60, 0.75, 0.90, 1.05, 1.20, 1.35)
+  ) +
+  
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+## Colour schemes
+
+Instead of using the default colours, we are also able to specify the preferred
+colour palette into the different `tmap` elements.
+
+### ColourBrewer palette
+
+Built-in into the package are ColourBrewer palettes which can be specified with
+the name of the colour palette, such as `Blues`.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  
+  tm_fill(
+    "DEPENDENCY",
+    n = 6,
+    style = "quantile",
+    palette = "Blues"
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+We can also reverse the colour shading by adding the `-` prefix.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  
+  tm_fill(
+    "DEPENDENCY",
+    n = 6,
+    style = "quantile",
+    palette = "-Blues"
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+## Map layout
+
+Map layout refers to the combination of map elements of the map. It includes several elements
+such as the title, scale bar, compass, margins, etc. 
+
+### Map legend
+
+In `tmap`, there are several options to alter the legend of the map.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  
+  tm_fill(
+    "DEPENDENCY",
+    style = "jenks",
+    palette = "Blues",
+
+    legend.hist = TRUE,
+    legend.is.portrait = TRUE,
+    legend.hist.z = 0.1
+  ) +
+
+  tm_layout(
+    main.title = "Distribution of Dependency Ratio by planning subzone\n (Jenks classification)",
+    main.title.position = "center",
+    main.title.size = 1,
+
+    legend.height = 0.45,
+    legend.width = 0.35,
+    legend.outside = FALSE,
+    legend.position = c("right", "bottom"),
+    
+    frame = FALSE
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+### Map style
+
+There are some styles included in the package as well, defined in the `tmap_style` function.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  
+  tm_fill(
+    "DEPENDENCY",
+    style = "jenks",
+    palette = "Blues"
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  ) + 
+
+  tmap_style("classic")
+```
+
+### Cartographic furniture
+
+Beyond map style, `tmap` also provides other functions to draw toher map furniture such
+as compass, scale bar and grid lines.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+  
+  tm_fill(
+    "DEPENDENCY",
+    style = "jenks",
+    palette = "Blues",
+  ) +
+
+  tm_layout(
+    main.title = "Distribution of Dependency Ratio by planning subzone",
+    main.title.position = "center",
+    main.title.size = 1.2,
+
+    legend.height = 0.45,
+    legend.width = 0.35,
+    
+    frame = TRUE
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  ) +
+
+  tm_compass(
+    type = "8star",
+    size = 2
+  ) +
+
+  tm_scale_bar(width = 0.15) +
+
+  tm_grid(
+    lwd = 0.1,
+    alpha = 0.2
+  ) +
+
+  tm_credits(
+    "Source: Planning Sub-zone boundary from Urban Redevelopment Authority (URA)\n and population data from Department of Statistics (DOS)",
+    position = c("left", "bottom")
+  )
+```
+
+Lastly, to rest to default style we can also use the following:
+
+```{R}
+tmap_style("white")
+```
+
+## Facet maps
+
+Facet maps are maps which are composed of many smaller maps, arranged side-by-side and
+sometimes stacked vertically. They enable the visualisation of how spatial relationships
+change with respect to another variable, such as time.
+
+Using `tmap`, there are 3 ways to plot facet maps:
+
+- By assigning multiple values to at least one of the aesthetic arguments
+- By defining group-by variables in `tm_facets`
+- By creating multiple, separate maps, and combining them with `tmap_arrange`
+
+### Assigning multiple values
+
+For example, we will be combining the `YOUNG` and `AGED` fields from the dataset into
+the map plots.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+
+  tm_fill(
+    c("YOUNG", "AGED"),
+    style = "equal",
+    palette = "Blues"
+  ) +
+
+  tm_layout(
+    legend.position = c("right", "bottom")
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  ) +
+
+  tmap_style("white")
+
+```
+
+We can also allocate separate colour schemes for each small map.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+
+  tm_fill(
+    c("YOUNG", "AGED"),
+    style = "equal",
+    palette = list("Blues", "Greens")
+  ) +
+
+  tm_layout(
+    legend.position = c("right", "bottom")
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  ) +
+
+  tmap_style("white")
+```
+
+### Group-by variables
+
+Another method for drawing facet maps is to group the data based on certain fields.
+In our case, we can group the subzones in the data to the regions they belong to.
+
+```{R}
+tm_shape(master_plan_subzone_population_2020) +
+
+  tm_fill(
+    "DEPENDENCY",
+    style = "quantile",
+    palette = "Blues",
+
+    # Set the minimum size of polygons to be plotted
+    thres.poly = 0
+  ) +
+
+  tm_facets(
+
+    # Field to group by
+    by = "REGION_N",
+
+    # Set whether coordinate systems of facets are allowed to defer
+    free.coords = TRUE,
+    
+    # Set whether to exclude maps without data
+    drop.units = TRUE
+  ) +
+
+  tm_layout(
+    legend.show = FALSE,
+    title.position = c("center", "center"),
+    title.size = 20
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+### Stand-alone maps
+
+Multiple stand-alone maps can also be created using `tmap_arrange`.
+
+```{R}
+population_young_map <- tm_shape(master_plan_subzone_population_2020) +
+  tm_polygons(
+    "YOUNG",
+    style = "quantile",
+    palette = "Blues"
+  )
+
+population_aged_map <- tm_shape(master_plan_subzone_population_2020) +
+  tm_polygons(
+    "AGED",
+    style = "quantile",
+    palette = "Blues"
+  )
+
+tmap_arrange(
+  population_young_map,
+  population_aged_map,
+  asp = 1,
+  ncol = 2
+)
+```
+
+## Selection criterion
+
+Instead of creating multiple, smaller maps, it is also possible to map spatial objects
+which satisfy a certain selection criterion.
+
+```{R}
+tm_shape(
+  master_plan_subzone_population_2020[
+    master_plan_subzone_population_2020$REGION_N == "CENTRAL REGION",
+  ]
+) +
+
+  tm_fill(
+    "DEPENDENCY",
+    style = "quantile",
+    palette = "Blues",
+
+    legend.hist = TRUE,
+    legend.is.portrait = TRUE,
+    legend.hist.z = 0.1
+  ) +
+
+  tm_layout(
+    legend.outside = TRUE,
+    legend.position = c("right", "bottom"),
+
+    frame = FALSE
+  ) +
+
+  tm_borders(
+    lwd = 0.5,
+    alpha = 1
+  )
+```
+
+# References
+
+## tmap
+  
+- [tmap: Thematic Maps in R](https://www.jstatsoft.org/article/view/v084i06)
+- [tmap](https://cran.r-project.org/web/packages/tmap/index.html)
+- [tmap: get started!](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
+- [tmap: changes in version 2.0](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-changes-v2.html)
+- [tmap: creating thematic maps in a flexible way (useR!2015)](http://von-tijn.nl/tijn/research/presentations/tmap_user2015.pdf)
+- [Exploring and presenting maps with tmap (useR!2017)](http://von-tijn.nl/tijn/research/presentations/tmap_user2017.pdf)
+
+## Geospatial data wrangling
+
+- [sf: Simple Features for R](https://cran.r-project.org/web/packages/sf/index.html)
+- [Simple Features for R: Standardized Support for Spatial Vector Data](https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf)
+- [Reading, Writing and Converting Simple Features](https://cran.r-project.org/web/packages/sf/vignettes/sf2.html)
+
+## Data wrangling
+
+- [dplyr](https://dplyr.tidyverse.org/)
+- [Tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
+- [tidyr: Easily Tidy Data with "spread()" and "gather()" Functions](https://cran.r-project.org/web/packages/tidyr/tidyr.pdf)

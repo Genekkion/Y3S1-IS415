@@ -1,7 +1,7 @@
 project:
   type: website
   preview:
-    host: 192.168.10.102
+    host: 192.168.10.104
     port: 4415
     browser: false
 

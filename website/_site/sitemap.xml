@@ -1,43 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://is415.swoh.dev/index.html</loc>
-    <lastmod>2024-08-14T02:12:51.825Z</lastmod>
-  </url>
-  <url>
-    <loc>https://is415.swoh.dev/hands_on_exercises/exercise_1/exercise.html</loc>
-    <lastmod>2024-08-17T08:25:33.306Z</lastmod>
-  </url>
-  <url>
-    <loc>https://is415.swoh.dev/about/about.html</loc>
-    <lastmod>2024-08-14T01:59:13.477Z</lastmod>
-  </url>
-  <url>
-    <loc>https://is415.swoh.dev/in_class_exercises/exercise_1/exercise.html</loc>
-    <lastmod>2024-08-19T02:39:57.897Z</lastmod>
-  </url>
-  <url>
-    <loc>https://is415.swoh.dev/in_class_exercises/exercise_1/MPSZ-2019/MPSZ-2019.html</loc>
-    <lastmod>2024-08-19T02:36:06.771Z</lastmod>
-  </url>
-  <url>
     <loc>https://is415-swoh.netlify.app/in_class_exercises/exercise_1/exercise.html</loc>
-    <lastmod>2024-08-19T03:22:19.235Z</lastmod>
-  </url>
-  <url>
-    <loc>https://is415-swoh.netlify.app/hands_on_exercises/exercise_1/exercise.html</loc>
-    <lastmod>2024-08-23T03:19:05.910Z</lastmod>
-  </url>
-  <url>
-    <loc>https://is415-swoh.netlify.app/index.html</loc>
-    <lastmod>2024-08-14T02:12:51.825Z</lastmod>
-  </url>
-  <url>
-    <loc>https://is415-swoh.netlify.app/in_class_exercises/exercise_1/MPSZ-2019/MPSZ-2019.html</loc>
-    <lastmod>2024-08-19T02:36:06.771Z</lastmod>
+    <lastmod>2024-08-23T09:02:38.621Z</lastmod>
   </url>
   <url>
     <loc>https://is415-swoh.netlify.app/hands_on_exercises/exercise_2/exercise.html</loc>
-    <lastmod>2024-08-23T03:14:15.243Z</lastmod>
+    <lastmod>2024-08-23T13:40:15.291Z</lastmod>
+  </url>
+  <url>
+    <loc>https://is415-swoh.netlify.app/index.html</loc>
+    <lastmod>2024-08-23T09:02:38.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://is415-swoh.netlify.app/hands_on_exercises/exercise_1/exercise.html</loc>
+    <lastmod>2024-08-23T09:02:38.621Z</lastmod>
   </url>
 </urlset>

@@ -1,3 +1,4 @@
+*.nix
 # ---> R
 # History files
 .Rhistory
