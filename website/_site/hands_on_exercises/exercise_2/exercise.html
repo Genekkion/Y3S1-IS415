@@ -145,11 +145,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">In-Class Exercises</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercises">    
-        <li class="dropdown-header">In-Class Exercise 1</li>
+        <li>
+    <a class="dropdown-item" href="../../in_class_exercises/exercise_1/exercise.html">
+ <span class="dropdown-text">In-Class Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../in_class_exercises/exercise_2/exercise.html">
+ <span class="dropdown-text">In-Class Exercise 2</span></a>
+  </li>  
     </ul>
   </li>
-  <li class="dropdown-header">
- <span class="menu-text">Take-Home Exercises</span></li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -269,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">August 23, 2024</p>
+      <p class="date-modified">August 26, 2024</p>
     </div>
   </div>
     
@@ -483,12 +488,12 @@ dbl (2): Pop, Time
 <span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Likewise create for AGED</span></span>
 <span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AGED</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">16</span><span class="sc">:</span><span class="dv">22</span>])</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AGED</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">16</span><span class="sc">:</span><span class="dv">21</span>])</span>
 <span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sum up all age group data</span></span>
 <span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">22</span>])</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">21</span>])</span>
 <span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate dependency as explained above</span></span>
@@ -511,16 +516,16 @@ dbl (2): Pop, Time
 <pre><code># A tibble: 332 × 7
    PA         SZ                     YOUNG ECONOMY_ACTIVE  AGED TOTAL DEPENDENCY
    &lt;chr&gt;      &lt;chr&gt;                  &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1 Ang Mo Kio Ang Mo Kio Town Centre  1290           2760  2050  6100       1.21
- 2 Ang Mo Kio Cheng San               5640          16460 11690 33790       1.05
- 3 Ang Mo Kio Chong Boon              5100          15000 11570 31670       1.11
- 4 Ang Mo Kio Kebun Bahru             4620          13010  9740 27370       1.10
- 5 Ang Mo Kio Sembawang Hills         1880           3630  3190  8700       1.40
- 6 Ang Mo Kio Shangri-La              3330           9050  6940 19320       1.13
- 7 Ang Mo Kio Tagore                  1940           4480  3470  9890       1.21
- 8 Ang Mo Kio Townsville              4190          11950  9290 25430       1.13
- 9 Ang Mo Kio Yio Chu Kang               0              0     0     0     NaN   
-10 Ang Mo Kio Yio Chu Kang East       1110           2410  1860  5380       1.23
+ 1 Ang Mo Kio Ang Mo Kio Town Centre  1290           2760   760  4810      0.743
+ 2 Ang Mo Kio Cheng San               5640          16460  6050 28150      0.710
+ 3 Ang Mo Kio Chong Boon              5100          15000  6470 26570      0.771
+ 4 Ang Mo Kio Kebun Bahru             4620          13010  5120 22750      0.749
+ 5 Ang Mo Kio Sembawang Hills         1880           3630  1310  6820      0.879
+ 6 Ang Mo Kio Shangri-La              3330           9050  3610 15990      0.767
+ 7 Ang Mo Kio Tagore                  1940           4480  1530  7950      0.775
+ 8 Ang Mo Kio Townsville              4190          11950  5100 21240      0.777
+ 9 Ang Mo Kio Yio Chu Kang               0              0     0     0    NaN    
+10 Ang Mo Kio Yio Chu Kang East       1110           2410   750  4270      0.772
 # ℹ 322 more rows</code></pre>
 </div>
 </div>
@@ -818,16 +823,16 @@ dbl (2): Pop, Time
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(master_plan_subzone_population_2020<span class="sc">$</span>DEPENDENCY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-  0.000   1.058   1.125   1.188   1.214  19.000      92 </code></pre>
+ 0.0000  0.6519  0.7025  0.7742  0.7645 19.0000      92 </code></pre>
 </div>
 </div>
-<p>Based on the results above, let’s say we set the breakpoints at 0.15 intervals between 0.6 and 1.2. We will also include a minimum and maximum of 0 and 1.3 respectively.</p>
+<p>Based on the results above, let’s say we set the breakpoints at 0.10 intervals between 0.6 and 0.9. We will also include a minimum and maximum of 0 and 1.0 respectively.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(master_plan_subzone_population_2020) <span class="sc">+</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"DEPENDENCY"</span>,</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.60</span>, <span class="fl">0.75</span>, <span class="fl">0.90</span>, <span class="fl">1.05</span>, <span class="fl">1.20</span>, <span class="fl">1.35</span>)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.60</span>, <span class="fl">0.70</span>, <span class="fl">0.80</span>, <span class="fl">0.90</span>, <span class="fl">1.00</span>)</span>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(</span>

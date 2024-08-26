@@ -15,20 +15,326 @@ execute:
 
 ---
 
-# Overview
-Write code chunk to import Master Plan 2015 in shapefile
-and kml, in sf
+# Master Plan Subzone Boundary 2014 (Web)
+
+## Task
+
+Write the code to import the Master Plan Subzone Boundary 2014 dataset,
+from both the shapefile and kml format. The data can be found from 
+[data.gov.sg](https://data.gov.sg/).
 
 
 ```{R}
-pacman::p_load(sf, tidyverse)
+# Load sf library for data handling
+pacman::p_load(sf, tidyverse, ggstatplot, tmap)
 
-master_plan_subzone_boundary_shapefile <- st_read(
+# Load shapefile data
+master_plan_subzone_boundary_2014_shapefile <- st_read(
   dsn = "data/geospatial",
   layer = "MP14_SUBZONE_WEB_PL"
 )
 
-#master_plan_subzone_boundary_kml <- st_read(
-#  "data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"
-#)
+```
+
+## Issue faced
+
+The following code errors, why?
+
+```{R}
+#| error: TRUE
+# Load kml data
+
+master_plan_subzone_boundary_2014_kml <- st_read(
+  "data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml",
+)
+```
+
+Even though both are from the same source, it appears that the kml file
+has some issues. Possible causes would include file corruption, which
+has caused the file itself to be unreadable in its current state.
+
+## Possible fixes
+
+In the event that we have the data in another format, in this case,
+the shapefile format, we are also able to convert the data from the
+shapefile format and write into a kml file.
+
+```{R}
+find("st_write")
+
+# Writes the kml file from the data in the shapefile format
+st_write(
+  master_plan_subzone_boundary_2014_shapefile,
+  "data/geospatial/MP14_SUBZONE_WEB_PL.kml",
+  delete_dsn = TRUE
+)
+```
+
+<u>Note:</u> `delete_dsn` is the flag for overwriting the file
+destination. Without turning on the flag, the data can be appended
+to the destination file instead.
+
+
+Voila! Now we have a working kml file to work with in the future.
+
+```{R}
+# Load kml data
+
+master_plan_subzone_boundary_2014_kml <- st_read(
+  "data/geospatial/MP14_SUBZONE_WEB_PL.kml"
+)
+```
+
+
+
+# Master Plan Subzone Boundary 2019 (No Sea)
+
+## Task
+
+Write the code to import the Master Plan 2019 Subzone Boundary (No Sea)
+dataset, from both the shapefile and kml format into `sf` data frames.
+The kml file can be found from [data.gov.sg](https://data.gov.sg/),
+while the shapefile files have been sourced separately.
+
+```{R}
+# Load shapefile
+master_plan_subzone_boundary_2019_shapefile <- st_read(
+  dsn = "data/MPSZ-2019",
+  "MPSZ-2019"
+)
+
+# Load kml
+master_plan_subzone_boundary_2019_kml <- st_read(
+  "data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml"
+)
+```
+
+## Differences in data
+
+Just from the summaries alone, we can see that there are differences in
+the data from both file formats. While the shapefile version has 6
+fields, the kml format only has 2.
+
+This has to do with the kml format itself, which is a special form
+of xml, meant for geospatial data. Due to xml, the data is hidden
+in long chunks of xml code, inclusive of the opening and closing tags,
+such as "\<table>...\</table>".
+
+Before we are able to use the data from kml, we will have to parse and
+extract the data from the underlying xml format. While it may contain
+the same information, the different file formats will store the data
+in different forms.
+
+### Learning point
+
+It is always good practice to source for data in different formats,
+looking through the different file formats to determine which is the
+most suitable. For example, in the above dataset, it may be easier to 
+use the shapefile format since the data is already given to us as
+fields in the data frame directly.
+
+However, it is also important to note that ease of usage is not the
+only criteria we should check for. More importantly, the completeness
+of data is far more crucial, even if it requires more work to get the 
+data prepared.
+
+## Projection system
+
+As shown in the summaries previously, both datasets are presented in the
+WGS84 coordinate system, which is usually nod ideal for geospatial
+analysis. Instead, we are going to project it into the SVY21 projected
+coordinate system.
+
+```{R}
+# head(master_plan_subzone_boundary_2019_kml, n = 5)
+head(master_plan_subzone_boundary_2019_shapefile, n = 5)
+
+master_plan_subzone_boundary_2019_shapefile_crs <- st_transform(
+  master_plan_subzone_boundary_2019_shapefile,
+  crs = 3414
+)
+
+head(
+  master_plan_subzone_boundary_2019_shapefile_crs,
+  n = 5
+)
+
+# view(master_plan_subzone_boundary_2019_shapefile_crs)
+```
+
+We can see that instead of seeing the geometry in degrees (from a
+geographic coordinate system) to metres (projected coordinate system).
+
+### Learning point
+
+It is important to check on the coordinate systems used in datasets.
+Data from same source, and especially different sources may use different
+coordinate systems. We must always use the correct type of coordinate
+system for our use case, whether it be geographic or projected.
+
+
+
+# Pre School Locations
+
+## Task
+
+Write the code to import the Pre School Locations dataset from
+the kml format into a `sf` data frame.
+
+```{R}
+preschools_locations <- st_read(
+  "data/geospatial/PreSchoolsLocation.kml"
+)
+```
+
+## Projection system
+
+As it is in the WGS84 coordinate system, we are going to
+project it into the SVY21 projected coordinate system.
+
+```{R}
+head(
+  preschools_locations,
+  n = 5
+)
+
+preschools_locations <- st_transform(
+  preschools_locations,
+  crs = 3414
+)
+
+head(
+  preschools_locations,
+  n = 5
+)
+```
+
+# Singapore Population Data
+
+## Task
+
+Write the code to import the Singapore Residents by Planning Area /
+Subzone, Age Group, Sex and Type of Dwelling (June 2023) dataset.
+
+
+## Data sources
+
+Data can be found from [singstat.gov.sg](https://singstat.gov.sg).
+Likewise, for aspatial data, there are also different formats
+which will affect the ease of use.
+
+For example, in the above source, the csv and excel are available,
+but the excel may have rows such as for the title or description
+which are not important in our case.
+
+Hence, we should look at the data before importing it, to ensure
+that we are getting the correct rows and columns.
+
+```{R}
+population_data <- read_csv(
+  "data/aspatial/respopagesextod2023.csv",
+  show_col_types = FALSE
+) 
+```
+
+## Data preparation
+
+We now want to get the population data, grouped across the different
+region, subzone, as well as age group.
+
+```{R}
+#| warning: FALSE
+
+population_data_2023 <- population_data %>%
+
+  group_by(
+    `PA`,
+    `SZ`,
+    `AG`
+  ) %>% 
+
+  summarise(
+    `POP` = sum( `Pop` )
+  ) %>%
+
+  # Remember to ungroup since we no longer require the group_by
+  ungroup() %>%
+
+  
+  pivot_wider(
+    names_from = `AG`,
+    values_from = `POP`
+  )
+
+head(
+  population_data_2023,
+  n = 5
+)
+```
+
+## Data wrangling
+
+As with the previous exercises, it should be noted that columns
+may not always be in order, especially if they are sorted
+lexicographically. Hence, manual counting is sometimes requried
+to ensure the columns are in order.
+
+```{R}
+population_data_2023 <- population_data_2023 %>%
+  mutate(
+    `YOUNG` = 
+      rowSums(.[3:6]) +
+      rowSums(.[14])
+  ) %>%
+
+  mutate(
+    `ECONOMY_ACTIVE` = 
+      rowSums(.[7:13]) +
+      rowSums(.[15])
+  ) %>%
+  
+  mutate(
+    `AGED` = rowSums(.[16:21])
+  ) %>%
+
+  mutate(
+    `TOTAL` = rowSums(.[3:21])
+  ) %>%
+
+  mutate(
+    `DEPENDENCY` = (`YOUNG` + `AGED`) / `ECONOMY_ACTIVE`
+  ) %>%
+
+  select(
+    `PA`, `SZ`, `YOUNG`,
+    `ECONOMY_ACTIVE`, `AGED`, `TOTAL`,
+    `DEPENDENCY`
+  )
+
+head(
+  population_data_2023,
+  n = 5
+)
+
+population_data_2023 <- population_data_2023 %>%
+  mutate_at(
+    .vars = vars(`PA`, `SZ`),
+    .funs = list(toupper)
+  ) %>%
+
+  filter(
+    `ECONOMY_ACTIVE` > 0
+  )
+
+population_data_2023_master_subzone_boundary_2019 <- left_join(
+    master_plan_subzone_boundary_2019_shapefile,
+    population_data_2023,
+    by = c("SUBZONE_N" = "SZ")
+  )
+
+head(
+  population_data_2023_master_subzone_boundary_2019,
+  n = 5
+)
+
 ```

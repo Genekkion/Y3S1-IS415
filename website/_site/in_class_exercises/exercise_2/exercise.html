@@ -180,7 +180,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#master-plan-subzone-boundary-2014-web" id="toc-master-plan-subzone-boundary-2014-web" class="nav-link active" data-scroll-target="#master-plan-subzone-boundary-2014-web"><span class="header-section-number">1</span> Master Plan Subzone Boundary 2014 (Web)</a>
+  <ul class="collapse">
+  <li><a href="#task" id="toc-task" class="nav-link" data-scroll-target="#task"><span class="header-section-number">1.1</span> Task</a></li>
+  <li><a href="#issue-faced" id="toc-issue-faced" class="nav-link" data-scroll-target="#issue-faced"><span class="header-section-number">1.2</span> Issue faced</a></li>
+  <li><a href="#possible-fixes" id="toc-possible-fixes" class="nav-link" data-scroll-target="#possible-fixes"><span class="header-section-number">1.3</span> Possible fixes</a></li>
+  </ul></li>
+  <li><a href="#master-plan-subzone-boundary-2019-no-sea" id="toc-master-plan-subzone-boundary-2019-no-sea" class="nav-link" data-scroll-target="#master-plan-subzone-boundary-2019-no-sea"><span class="header-section-number">2</span> Master Plan Subzone Boundary 2019 (No Sea)</a>
+  <ul class="collapse">
+  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">2.1</span> Task</a></li>
+  <li><a href="#differences-in-data" id="toc-differences-in-data" class="nav-link" data-scroll-target="#differences-in-data"><span class="header-section-number">2.2</span> Differences in data</a>
+  <ul class="collapse">
+  <li><a href="#learning-point" id="toc-learning-point" class="nav-link" data-scroll-target="#learning-point"><span class="header-section-number">2.2.1</span> Learning point</a></li>
+  </ul></li>
+  <li><a href="#projection-system" id="toc-projection-system" class="nav-link" data-scroll-target="#projection-system"><span class="header-section-number">2.3</span> Projection system</a>
+  <ul class="collapse">
+  <li><a href="#learning-point-1" id="toc-learning-point-1" class="nav-link" data-scroll-target="#learning-point-1"><span class="header-section-number">2.3.1</span> Learning point</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#pre-school-locations" id="toc-pre-school-locations" class="nav-link" data-scroll-target="#pre-school-locations"><span class="header-section-number">3</span> Pre School Locations</a>
+  <ul class="collapse">
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">3.1</span> Task</a></li>
+  <li><a href="#projection-system-1" id="toc-projection-system-1" class="nav-link" data-scroll-target="#projection-system-1"><span class="header-section-number">3.2</span> Projection system</a></li>
+  </ul></li>
+  <li><a href="#singapore-population-data" id="toc-singapore-population-data" class="nav-link" data-scroll-target="#singapore-population-data"><span class="header-section-number">4</span> Singapore Population Data</a>
+  <ul class="collapse">
+  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3"><span class="header-section-number">4.1</span> Task</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources"><span class="header-section-number">4.2</span> Data sources</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">4.3</span> Data preparation</a></li>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling"><span class="header-section-number">4.4</span> Data wrangling</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -227,16 +256,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
-<p>Write code chunk to import Master Plan 2015 in shapefile and kml, in sf</p>
+<section id="master-plan-subzone-boundary-2014-web" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Master Plan Subzone Boundary 2014 (Web)</h1>
+<section id="task" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="task"><span class="header-section-number">1.1</span> Task</h2>
+<p>Write the code to import the Master Plan Subzone Boundary 2014 dataset, from both the shapefile and kml format. The data can be found from <a href="https://data.gov.sg/">data.gov.sg</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_shapefile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/geospatial"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_WEB_PL"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load sf library for data handling</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tidyverse, ggstatplot, tmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into '/home/swoh/R/x86_64-pc-linux-gnu-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggstatplot' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 'BiocManager' not available.  Could not check Bioconductor.
+
+Please use `install.packages('BiocManager')` and then retry.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in p_install(package, character.only = TRUE, ...):</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+logical.return = TRUE, : there is no package called 'ggstatplot'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pacman::p_load(sf, tidyverse, ggstatplot, tmap): Failed to install/load:
+ggstatplot</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shapefile data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_shapefile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/geospatial"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_WEB_PL"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `MP14_SUBZONE_WEB_PL' from data source 
   `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial' 
@@ -247,12 +306,431 @@ Dimension:     XY
 Bounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33
 Projected CRS: SVY21</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#master_plan_subzone_boundary_kml &lt;- st_read(</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  "data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="issue-faced" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="issue-faced"><span class="header-section-number">1.2</span> Issue faced</h2>
+<p>The following code errors, why?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: Cannot open "/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"; The source could be corrupt or not supported. See `st_drivers()` for a list of supported formats.</code></pre>
+</div>
+</div>
+<p>Even though both are from the same source, it appears that the kml file has some issues. Possible causes would include file corruption, which has caused the file itself to be unreadable in its current state.</p>
+</section>
+<section id="possible-fixes" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="possible-fixes"><span class="header-section-number">1.3</span> Possible fixes</h2>
+<p>In the event that we have the data in another format, in this case, the shapefile format, we are also able to convert the data from the shapefile format and write into a kml file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span>(<span class="st">"st_write"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "package:sf"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Writes the kml file from the data in the shapefile format</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2014_shapefile,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MP14_SUBZONE_WEB_PL.kml"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">delete_dsn =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Deleting source `data/geospatial/MP14_SUBZONE_WEB_PL.kml' using driver `KML'
+Writing layer `MP14_SUBZONE_WEB_PL' to data source 
+  `data/geospatial/MP14_SUBZONE_WEB_PL.kml' using driver `KML'
+Writing 323 features with 15 fields and geometry type Multi Polygon.</code></pre>
+</div>
+</div>
+<p><u>Note:</u> <code>delete_dsn</code> is the flag for overwriting the file destination. Without turning on the flag, the data can be appended to the destination file instead.</p>
+<p>Voila! Now we have a working kml file to work with in the future.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MP14_SUBZONE_WEB_PL.kml"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `MP14_SUBZONE_WEB_PL' from data source 
+  `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/MP14_SUBZONE_WEB_PL.kml' 
+  using driver `KML'
+Simple feature collection with 323 features and 2 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 103.6057 ymin: 1.158699 xmax: 104.0885 ymax: 1.470775
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="master-plan-subzone-boundary-2019-no-sea" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Master Plan Subzone Boundary 2019 (No Sea)</h1>
+<section id="task-1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">2.1</span> Task</h2>
+<p>Write the code to import the Master Plan 2019 Subzone Boundary (No Sea) dataset, from both the shapefile and kml format into <code>sf</code> data frames. The kml file can be found from <a href="https://data.gov.sg/">data.gov.sg</a>, while the shapefile files have been sourced separately.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shapefile</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_shapefile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/MPSZ-2019"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MPSZ-2019"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `MPSZ-2019' from data source 
+  `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/MPSZ-2019' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 332 features and 6 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 103.6057 ymin: 1.158699 xmax: 104.0885 ymax: 1.470775
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `URA_MP19_SUBZONE_NO_SEA_PL' from data source 
+  `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml' 
+  using driver `KML'
+Simple feature collection with 332 features and 2 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY, XYZ
+Bounding box:  xmin: 103.6057 ymin: 1.158699 xmax: 104.0885 ymax: 1.470775
+z_range:       zmin: 0 zmax: 0
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+</section>
+<section id="differences-in-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="differences-in-data"><span class="header-section-number">2.2</span> Differences in data</h2>
+<p>Just from the summaries alone, we can see that there are differences in the data from both file formats. While the shapefile version has 6 fields, the kml format only has 2.</p>
+<p>This has to do with the kml format itself, which is a special form of xml, meant for geospatial data. Due to xml, the data is hidden in long chunks of xml code, inclusive of the opening and closing tags, such as “&lt;table&gt;…&lt;/table&gt;”.</p>
+<p>Before we are able to use the data from kml, we will have to parse and extract the data from the underlying xml format. While it may contain the same information, the different file formats will store the data in different forms.</p>
+<section id="learning-point" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="learning-point"><span class="header-section-number">2.2.1</span> Learning point</h3>
+<p>It is always good practice to source for data in different formats, looking through the different file formats to determine which is the most suitable. For example, in the above dataset, it may be easier to use the shapefile format since the data is already given to us as fields in the data frame directly.</p>
+<p>However, it is also important to note that ease of usage is not the only criteria we should check for. More importantly, the completeness of data is far more crucial, even if it requires more work to get the data prepared.</p>
+</section>
+</section>
+<section id="projection-system" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="projection-system"><span class="header-section-number">2.3</span> Projection system</h2>
+<p>As shown in the summaries previously, both datasets are presented in the WGS84 coordinate system, which is usually nod ideal for geospatial analysis. Instead, we are going to project it into the SVY21 projected coordinate system.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(master_plan_subzone_boundary_2019_kml, n = 5)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(master_plan_subzone_boundary_2019_shapefile, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 6 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 103.6537 ymin: 1.216215 xmax: 103.8811 ymax: 1.29742
+Geodetic CRS:  WGS 84
+                SUBZONE_N SUBZONE_C      PLN_AREA_N PLN_AREA_C       REGION_N
+1             MARINA EAST    MESZ01     MARINA EAST         ME CENTRAL REGION
+2        INSTITUTION HILL    RVSZ05    RIVER VALLEY         RV CENTRAL REGION
+3          ROBERTSON QUAY    SRSZ01 SINGAPORE RIVER         SR CENTRAL REGION
+4 JURONG ISLAND AND BUKOM    WISZ01 WESTERN ISLANDS         WI    WEST REGION
+5            FORT CANNING    MUSZ02          MUSEUM         MU CENTRAL REGION
+  REGION_C                       geometry
+1       CR MULTIPOLYGON (((103.8802 1....
+2       CR MULTIPOLYGON (((103.8376 1....
+3       CR MULTIPOLYGON (((103.8341 1....
+4       WR MULTIPOLYGON (((103.7125 1....
+5       CR MULTIPOLYGON (((103.8472 1....</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_shapefile_crs <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2019_shapefile,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs =</span> <span class="dv">3414</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2019_shapefile_crs,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 6 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 8012.578 ymin: 22108.68 xmax: 33316.59 ymax: 31087.61
+Projected CRS: SVY21 / Singapore TM
+                SUBZONE_N SUBZONE_C      PLN_AREA_N PLN_AREA_C       REGION_N
+1             MARINA EAST    MESZ01     MARINA EAST         ME CENTRAL REGION
+2        INSTITUTION HILL    RVSZ05    RIVER VALLEY         RV CENTRAL REGION
+3          ROBERTSON QUAY    SRSZ01 SINGAPORE RIVER         SR CENTRAL REGION
+4 JURONG ISLAND AND BUKOM    WISZ01 WESTERN ISLANDS         WI    WEST REGION
+5            FORT CANNING    MUSZ02          MUSEUM         MU CENTRAL REGION
+  REGION_C                       geometry
+1       CR MULTIPOLYGON (((33222.98 29...
+2       CR MULTIPOLYGON (((28481.45 30...
+3       CR MULTIPOLYGON (((28087.34 30...
+4       WR MULTIPOLYGON (((14557.7 304...
+5       CR MULTIPOLYGON (((29542.53 31...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view(master_plan_subzone_boundary_2019_shapefile_crs)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see that instead of seeing the geometry in degrees (from a geographic coordinate system) to metres (projected coordinate system).</p>
+<section id="learning-point-1" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="learning-point-1"><span class="header-section-number">2.3.1</span> Learning point</h3>
+<p>It is important to check on the coordinate systems used in datasets. Data from same source, and especially different sources may use different coordinate systems. We must always use the correct type of coordinate system for our use case, whether it be geographic or projected.</p>
+</section>
+</section>
+</section>
+<section id="pre-school-locations" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Pre School Locations</h1>
+<section id="task-2" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="task-2"><span class="header-section-number">3.1</span> Task</h2>
+<p>Write the code to import the Pre School Locations dataset from the kml format into a <code>sf</code> data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>preschools_locations <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/PreSchoolsLocation.kml"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `PRESCHOOLS_LOCATION' from data source 
+  `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/PreSchoolsLocation.kml' 
+  using driver `KML'
+Simple feature collection with 2290 features and 2 fields
+Geometry type: POINT
+Dimension:     XYZ
+Bounding box:  xmin: 103.6878 ymin: 1.247759 xmax: 103.9897 ymax: 1.462134
+z_range:       zmin: 0 zmax: 0
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+</section>
+<section id="projection-system-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="projection-system-1"><span class="header-section-number">3.2</span> Projection system</h2>
+<p>As it is in the WGS84 coordinate system, we are going to project it into the SVY21 projected coordinate system.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 2 fields
+Geometry type: POINT
+Dimension:     XYZ
+Bounding box:  xmin: 103.8048 ymin: 1.299333 xmax: 103.8409 ymax: 1.435024
+z_range:       zmin: 0 zmax: 0
+Geodetic CRS:  WGS 84
+   Name
+1 kml_1
+2 kml_2
+3 kml_3
+4 kml_4
+5 kml_5
+                                                                                                                                                                                                                                                                                                                                                                                                Description
+1           &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDREN'S COVE PRESCHOOL PTE.LTD.&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT9390&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;498CC9FE48CC94D4&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+2                    &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDREN'S COVE PTE. LTD.&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT8675&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;22877550804213FD&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+3       &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDREN'S VINEYARD PRESCHOOL PTE. LTD&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT9308&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;B2FE90E44AD494E3&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+4 &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDTIME CARE &amp; DEVELOPMENT CENTRE PTE.LTD.&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT9122&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;1384CDC0D14B76A1&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+5                               &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILTERN HOUSE&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT2070&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;FB24EAA6E73B2723&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+                       geometry
+1 POINT Z (103.8072 1.299333 0)
+2  POINT Z (103.826 1.312839 0)
+3 POINT Z (103.8409 1.348843 0)
+4 POINT Z (103.8048 1.435024 0)
+5   POINT Z (103.839 1.33315 0)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>preschools_locations <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs =</span> <span class="dv">3414</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 2 fields
+Geometry type: POINT
+Dimension:     XYZ
+Bounding box:  xmin: 24821.92 ymin: 31299.16 xmax: 28844.56 ymax: 46303.16
+z_range:       zmin: 0 zmax: 0
+Projected CRS: SVY21 / Singapore TM
+   Name
+1 kml_1
+2 kml_2
+3 kml_3
+4 kml_4
+5 kml_5
+                                                                                                                                                                                                                                                                                                                                                                                                Description
+1           &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDREN'S COVE PRESCHOOL PTE.LTD.&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT9390&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;498CC9FE48CC94D4&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+2                    &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDREN'S COVE PTE. LTD.&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT8675&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;22877550804213FD&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+3       &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDREN'S VINEYARD PRESCHOOL PTE. LTD&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT9308&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;B2FE90E44AD494E3&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+4 &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILDTIME CARE &amp; DEVELOPMENT CENTRE PTE.LTD.&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT9122&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;1384CDC0D14B76A1&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+5                               &lt;center&gt;&lt;table&gt;&lt;tr&gt;&lt;th colspan='2' align='center'&gt;&lt;em&gt;Attributes&lt;/em&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;CENTRE_NAME&lt;/th&gt; &lt;td&gt;CHILTERN HOUSE&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;CENTRE_CODE&lt;/th&gt; &lt;td&gt;PT2070&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor="#E3E3F3"&gt; &lt;th&gt;INC_CRC&lt;/th&gt; &lt;td&gt;FB24EAA6E73B2723&lt;/td&gt; &lt;/tr&gt;&lt;tr bgcolor=""&gt; &lt;th&gt;FMEL_UPD_D&lt;/th&gt; &lt;td&gt;20211201093631&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;&lt;/center&gt;
+                       geometry
+1 POINT Z (25089.46 31299.16 0)
+2 POINT Z (27189.07 32792.54 0)
+3 POINT Z (28844.56 36773.76 0)
+4 POINT Z (24821.92 46303.16 0)
+5 POINT Z (28637.82 35038.49 0)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="singapore-population-data" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Singapore Population Data</h1>
+<section id="task-3" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="task-3"><span class="header-section-number">4.1</span> Task</h2>
+<p>Write the code to import the Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling (June 2023) dataset.</p>
+</section>
+<section id="data-sources" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="data-sources"><span class="header-section-number">4.2</span> Data sources</h2>
+<p>Data can be found from <a href="https://singstat.gov.sg">singstat.gov.sg</a>. Likewise, for aspatial data, there are also different formats which will affect the ease of use.</p>
+<p>For example, in the above source, the csv and excel are available, but the excel may have rows such as for the title or description which are not important in our case.</p>
+<p>Hence, we should look at the data before importing it, to ensure that we are getting the correct rows and columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>population_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/aspatial/respopagesextod2023.csv"</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-preparation" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">4.3</span> Data preparation</h2>
+<p>We now want to get the population data, grouped across the different region, subzone, as well as age group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">PA</span><span class="st">`</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AG</span><span class="st">`</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">POP</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>( <span class="st">`</span><span class="at">Pop</span><span class="st">`</span> )</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remember to ungroup since we no longer require the group_by</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> <span class="st">`</span><span class="at">AG</span><span class="st">`</span>,</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="st">`</span><span class="at">POP</span><span class="st">`</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>  population_data_2023,</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 21
+  PA       SZ    `0_to_4` `10_to_14` `15_to_19` `20_to_24` `25_to_29` `30_to_34`
+  &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+1 Ang Mo … Ang …      130        280        300        300        280        320
+2 Ang Mo … Chen…      870       1010       1090       1210       1580       1930
+3 Ang Mo … Chon…      700        890       1010       1230       1470       1730
+4 Ang Mo … Kebu…      620        860        970       1050       1240       1440
+5 Ang Mo … Semb…      200        390        430        480        500        390
+# ℹ 13 more variables: `35_to_39` &lt;dbl&gt;, `40_to_44` &lt;dbl&gt;, `45_to_49` &lt;dbl&gt;,
+#   `50_to_54` &lt;dbl&gt;, `55_to_59` &lt;dbl&gt;, `5_to_9` &lt;dbl&gt;, `60_to_64` &lt;dbl&gt;,
+#   `65_to_69` &lt;dbl&gt;, `70_to_74` &lt;dbl&gt;, `75_to_79` &lt;dbl&gt;, `80_to_84` &lt;dbl&gt;,
+#   `85_to_89` &lt;dbl&gt;, `90_and_Over` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="data-wrangling" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="data-wrangling"><span class="header-section-number">4.4</span> Data wrangling</h2>
+<p>As with the previous exercises, it should be noted that columns may not always be in order, especially if they are sorted lexicographically. Hence, manual counting is sometimes requried to ensure the columns are in order.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data_2023 <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span> <span class="ot">=</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>]) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">14</span>])</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span> <span class="ot">=</span> </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">7</span><span class="sc">:</span><span class="dv">13</span>]) <span class="sc">+</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">15</span>])</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AGED</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">16</span><span class="sc">:</span><span class="dv">21</span>])</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">21</span>])</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">DEPENDENCY</span><span class="st">`</span> <span class="ot">=</span> (<span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">AGED</span><span class="st">`</span>) <span class="sc">/</span> <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">PA</span><span class="st">`</span>, <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>, <span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span>,</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span>, <span class="st">`</span><span class="at">AGED</span><span class="st">`</span>, <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span>,</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">DEPENDENCY</span><span class="st">`</span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>  population_data_2023,</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 7
+  PA         SZ                     YOUNG ECONOMY_ACTIVE  AGED TOTAL DEPENDENCY
+  &lt;chr&gt;      &lt;chr&gt;                  &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Ang Mo Kio Ang Mo Kio Town Centre  1240           2830   890  4960      0.753
+2 Ang Mo Kio Cheng San               5150          15600  6580 27330      0.752
+3 Ang Mo Kio Chong Boon              4620          14120  7060 25800      0.827
+4 Ang Mo Kio Kebun Bahru             4320          12400  5640 22360      0.803
+5 Ang Mo Kio Sembawang Hills         1840           3670  1420  6930      0.888</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data_2023 <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">.vars =</span> <span class="fu">vars</span>(<span class="st">`</span><span class="at">PA</span><span class="st">`</span>, <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.funs =</span> <span class="fu">list</span>(toupper)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>population_data_2023_master_subzone_boundary_2019 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    master_plan_subzone_boundary_2019_shapefile,</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    population_data_2023,</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"SUBZONE_N"</span> <span class="ot">=</span> <span class="st">"SZ"</span>)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  population_data_2023_master_subzone_boundary_2019,</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 12 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 103.6537 ymin: 1.216215 xmax: 103.8811 ymax: 1.29742
+Geodetic CRS:  WGS 84
+                SUBZONE_N SUBZONE_C      PLN_AREA_N PLN_AREA_C       REGION_N
+1             MARINA EAST    MESZ01     MARINA EAST         ME CENTRAL REGION
+2        INSTITUTION HILL    RVSZ05    RIVER VALLEY         RV CENTRAL REGION
+3          ROBERTSON QUAY    SRSZ01 SINGAPORE RIVER         SR CENTRAL REGION
+4 JURONG ISLAND AND BUKOM    WISZ01 WESTERN ISLANDS         WI    WEST REGION
+5            FORT CANNING    MUSZ02          MUSEUM         MU CENTRAL REGION
+  REGION_C              PA YOUNG ECONOMY_ACTIVE AGED TOTAL DEPENDENCY
+1       CR            &lt;NA&gt;    NA             NA   NA    NA         NA
+2       CR    RIVER VALLEY  1050           2290  370  3710  0.6200873
+3       CR SINGAPORE RIVER  1050           2380  300  3730  0.5672269
+4       WR            &lt;NA&gt;    NA             NA   NA    NA         NA
+5       CR          MUSEUM    30            140   10   180  0.2857143
+                        geometry
+1 MULTIPOLYGON (((103.8802 1....
+2 MULTIPOLYGON (((103.8376 1....
+3 MULTIPOLYGON (((103.8341 1....
+4 MULTIPOLYGON (((103.7125 1....
+5 MULTIPOLYGON (((103.8472 1....</code></pre>
+</div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

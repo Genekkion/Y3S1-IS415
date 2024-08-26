@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://is415-swoh.netlify.app/hands_on_exercises/exercise_2/exercise.html</loc>
-    <lastmod>2024-08-23T13:40:15.291Z</lastmod>
+    <lastmod>2024-08-26T03:20:44.501Z</lastmod>
   </url>
   <url>
     <loc>https://is415-swoh.netlify.app/index.html</loc>
@@ -15,5 +15,9 @@
   <url>
     <loc>https://is415-swoh.netlify.app/about/about.html</loc>
     <lastmod>2024-08-23T09:02:38.614Z</lastmod>
+  </url>
+  <url>
+    <loc>https://is415-swoh.netlify.app/in_class_exercises/exercise_2/data/MPSZ-2019/MPSZ-2019.html</loc>
+    <lastmod>2024-08-26T01:43:20.568Z</lastmod>
   </url>
 </urlset>
