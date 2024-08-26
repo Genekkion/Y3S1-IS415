@@ -8,7 +8,7 @@ project:
 
 website:
   title: "IS415-GAA - swoh"
-  site-url: https://is415-swoh.netlify.app
+  site-url: "https://is415-swoh.netlify.app"
   
 
   navbar:
@@ -16,23 +16,25 @@ website:
       - text: "Hands-On Exercises"
         menu:
           - text: "Hands-On Exercise 1"
-            href: ./hands_on_exercises/exercise_1/exercise.qmd
+            href: "hands_on_exercises/exercise_1/exercise.html"
           - text: "Hands-On Exercise 2"
-            href: ./hands_on_exercises/exercise_2/exercise.qmd
+            href: "hands_on_exercises/exercise_2/exercise.html"
     
       - text: "In-Class Exercises"
-        # menu:
-          # - text: "In-Class Exercise 1"
-          #   href: ./in_class_exercises/exercise_1/exercise.qmd
+        menu:
+          - text: "In-Class Exercise 1"
+            href: "in_class_exercises/exercise_1/exercise.html"
+          - text: "In-Class Exercise 2"
+            href: "in_class_exercises/exercise_2/exercise.html"
 
-      - text: "Take-Home Exercises"
+      # - text: "Take-Home Exercises"
 
     right:
       - text: "Home"
-        href: index.qmd
+        href: "index.html"
 
       - text: "About"
-        href: ./about/about.qmd
+        href: "about/about.qmd"
 
 format:
   html:

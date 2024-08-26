@@ -1,0 +1,34 @@
+---
+title: "In-Class Exercise 2"
+# description: "Geospatial Data Science with R"
+author: "Oh Sheow Woon"
+date: "08/26/2024"
+date-modified: "last-modified"
+draft: true
+categories:
+  - in_class_exercise
+
+execute:
+  eval: true
+  echo: true
+  freeze: true
+
+---
+
+# Overview
+Write code chunk to import Master Plan 2015 in shapefile
+and kml, in sf
+
+
+```{R}
+pacman::p_load(sf, tidyverse)
+
+master_plan_subzone_boundary_shapefile <- st_read(
+  dsn = "data/geospatial",
+  layer = "MP14_SUBZONE_WEB_PL"
+)
+
+#master_plan_subzone_boundary_kml <- st_read(
+#  "data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"
+#)
+```
