@@ -26,7 +26,7 @@ from both the shapefile and kml format. The data can be found from
 
 ```{R}
 # Load sf library for data handling
-pacman::p_load(sf, tidyverse, ggstatplot, tmap)
+pacman::p_load(sf, tidyverse, tmap)
 
 # Load shapefile data
 master_plan_subzone_boundary_2014_shapefile <- st_read(

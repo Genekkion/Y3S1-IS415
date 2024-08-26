@@ -145,10 +145,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercises">    
         <li>
-    <a class="dropdown-item" href="../../in_class_exercises/exercise_1/exercise.html">
- <span class="dropdown-text">In-Class Exercise 1</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../../in_class_exercises/exercise_2/exercise.html">
  <span class="dropdown-text">In-Class Exercise 2</span></a>
   </li>  
@@ -263,39 +259,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Write the code to import the Master Plan Subzone Boundary 2014 dataset, from both the shapefile and kml format. The data can be found from <a href="https://data.gov.sg/">data.gov.sg</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load sf library for data handling</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tidyverse, ggstatplot, tmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Installing package into '/home/swoh/R/x86_64-pc-linux-gnu-library/4.3'
-(as 'lib' is unspecified)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggstatplot' is not available for this version of R
-
-A version of this package for your version of R might be available elsewhere,
-see the ideas at
-https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: 'BiocManager' not available.  Could not check Bioconductor.
-
-Please use `install.packages('BiocManager')` and then retry.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in p_install(package, character.only = TRUE, ...):</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
-logical.return = TRUE, : there is no package called 'ggstatplot'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in pacman::p_load(sf, tidyverse, ggstatplot, tmap): Failed to install/load:
-ggstatplot</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shapefile data</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_shapefile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/geospatial"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_WEB_PL"</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tidyverse, tmap)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shapefile data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_shapefile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/geospatial"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_WEB_PL"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `MP14_SUBZONE_WEB_PL' from data source 
   `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial' 
@@ -312,11 +282,11 @@ Projected CRS: SVY21</code></pre>
 <h2 data-number="1.2" class="anchored" data-anchor-id="issue-faced"><span class="header-section-number">1.2</span> Issue faced</h2>
 <p>The following code errors, why?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml data</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: Cannot open "/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/MasterPlan2014SubzoneBoundaryWebKML.kml"; The source could be corrupt or not supported. See `st_drivers()` for a list of supported formats.</code></pre>
 </div>
@@ -327,16 +297,16 @@ Projected CRS: SVY21</code></pre>
 <h2 data-number="1.3" class="anchored" data-anchor-id="possible-fixes"><span class="header-section-number">1.3</span> Possible fixes</h2>
 <p>In the event that we have the data in another format, in this case, the shapefile format, we are also able to convert the data from the shapefile format and write into a kml file.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span>(<span class="st">"st_write"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span>(<span class="st">"st_write"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "package:sf"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Writes the kml file from the data in the shapefile format</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2014_shapefile,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MP14_SUBZONE_WEB_PL.kml"</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">delete_dsn =</span> <span class="cn">TRUE</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Writes the kml file from the data in the shapefile format</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2014_shapefile,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MP14_SUBZONE_WEB_PL.kml"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">delete_dsn =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Deleting source `data/geospatial/MP14_SUBZONE_WEB_PL.kml' using driver `KML'
 Writing layer `MP14_SUBZONE_WEB_PL' to data source 
@@ -347,11 +317,11 @@ Writing 323 features with 15 fields and geometry type Multi Polygon.</code></pre
 <p><u>Note:</u> <code>delete_dsn</code> is the flag for overwriting the file destination. Without turning on the flag, the data can be appended to the destination file instead.</p>
 <p>Voila! Now we have a working kml file to work with in the future.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml data</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MP14_SUBZONE_WEB_PL.kml"</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2014_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MP14_SUBZONE_WEB_PL.kml"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `MP14_SUBZONE_WEB_PL' from data source 
   `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/MP14_SUBZONE_WEB_PL.kml' 
@@ -371,11 +341,11 @@ Geodetic CRS:  WGS 84</code></pre>
 <h2 data-number="2.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">2.1</span> Task</h2>
 <p>Write the code to import the Master Plan 2019 Subzone Boundary (No Sea) dataset, from both the shapefile and kml format into <code>sf</code> data frames. The kml file can be found from <a href="https://data.gov.sg/">data.gov.sg</a>, while the shapefile files have been sourced separately.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shapefile</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_shapefile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/MPSZ-2019"</span>,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MPSZ-2019"</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shapefile</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_shapefile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn =</span> <span class="st">"data/MPSZ-2019"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MPSZ-2019"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `MPSZ-2019' from data source 
   `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/MPSZ-2019' 
@@ -386,10 +356,10 @@ Dimension:     XY
 Bounding box:  xmin: 103.6057 ymin: 1.158699 xmax: 104.0885 ymax: 1.470775
 Geodetic CRS:  WGS 84</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml"</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load kml</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_kml <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `URA_MP19_SUBZONE_NO_SEA_PL' from data source 
   `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml' 
@@ -418,8 +388,8 @@ Geodetic CRS:  WGS 84</code></pre>
 <h2 data-number="2.3" class="anchored" data-anchor-id="projection-system"><span class="header-section-number">2.3</span> Projection system</h2>
 <p>As shown in the summaries previously, both datasets are presented in the WGS84 coordinate system, which is usually nod ideal for geospatial analysis. Instead, we are going to project it into the SVY21 projected coordinate system.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(master_plan_subzone_boundary_2019_kml, n = 5)</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(master_plan_subzone_boundary_2019_shapefile, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(master_plan_subzone_boundary_2019_kml, n = 5)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(master_plan_subzone_boundary_2019_shapefile, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 5 features and 6 fields
 Geometry type: MULTIPOLYGON
@@ -439,15 +409,15 @@ Geodetic CRS:  WGS 84
 4       WR MULTIPOLYGON (((103.7125 1....
 5       CR MULTIPOLYGON (((103.8472 1....</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_shapefile_crs <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2019_shapefile,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs =</span> <span class="dv">3414</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2019_shapefile_crs,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>master_plan_subzone_boundary_2019_shapefile_crs <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2019_shapefile,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs =</span> <span class="dv">3414</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  master_plan_subzone_boundary_2019_shapefile_crs,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 5 features and 6 fields
 Geometry type: MULTIPOLYGON
@@ -467,7 +437,7 @@ Projected CRS: SVY21 / Singapore TM
 4       WR MULTIPOLYGON (((14557.7 304...
 5       CR MULTIPOLYGON (((29542.53 31...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view(master_plan_subzone_boundary_2019_shapefile_crs)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view(master_plan_subzone_boundary_2019_shapefile_crs)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can see that instead of seeing the geometry in degrees (from a geographic coordinate system) to metres (projected coordinate system).</p>
 <section id="learning-point-1" class="level3" data-number="2.3.1">
@@ -482,9 +452,9 @@ Projected CRS: SVY21 / Singapore TM
 <h2 data-number="3.1" class="anchored" data-anchor-id="task-2"><span class="header-section-number">3.1</span> Task</h2>
 <p>Write the code to import the Pre School Locations dataset from the kml format into a <code>sf</code> data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>preschools_locations <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/PreSchoolsLocation.kml"</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>preschools_locations <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/geospatial/PreSchoolsLocation.kml"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `PRESCHOOLS_LOCATION' from data source 
   `/home/swoh/local/Y3S1-IS415/website/in_class_exercises/exercise_2/data/geospatial/PreSchoolsLocation.kml' 
@@ -502,10 +472,10 @@ Geodetic CRS:  WGS 84</code></pre>
 <h2 data-number="3.2" class="anchored" data-anchor-id="projection-system-1"><span class="header-section-number">3.2</span> Projection system</h2>
 <p>As it is in the WGS84 coordinate system, we are going to project it into the SVY21 projected coordinate system.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 5 features and 2 fields
 Geometry type: POINT
@@ -532,15 +502,15 @@ Geodetic CRS:  WGS 84
 4 POINT Z (103.8048 1.435024 0)
 5   POINT Z (103.839 1.33315 0)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>preschools_locations <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs =</span> <span class="dv">3414</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>preschools_locations <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs =</span> <span class="dv">3414</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  preschools_locations,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 5 features and 2 fields
 Geometry type: POINT
@@ -582,41 +552,41 @@ Projected CRS: SVY21 / Singapore TM
 <p>For example, in the above source, the csv and excel are available, but the excel may have rows such as for the title or description which are not important in our case.</p>
 <p>Hence, we should look at the data before importing it, to ensure that we are getting the correct rows and columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>population_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/aspatial/respopagesextod2023.csv"</span>,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>population_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/aspatial/respopagesextod2023.csv"</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-preparation" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">4.3</span> Data preparation</h2>
 <p>We now want to get the population data, grouped across the different region, subzone, as well as age group.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">PA</span><span class="st">`</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AG</span><span class="st">`</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">POP</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>( <span class="st">`</span><span class="at">Pop</span><span class="st">`</span> )</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remember to ungroup since we no longer require the group_by</span></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> <span class="st">`</span><span class="at">AG</span><span class="st">`</span>,</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="st">`</span><span class="at">POP</span><span class="st">`</span></span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>  population_data_2023,</span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">PA</span><span class="st">`</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AG</span><span class="st">`</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">POP</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>( <span class="st">`</span><span class="at">Pop</span><span class="st">`</span> )</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remember to ungroup since we no longer require the group_by</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> <span class="st">`</span><span class="at">AG</span><span class="st">`</span>,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="st">`</span><span class="at">POP</span><span class="st">`</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  population_data_2023,</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 21
   PA       SZ    `0_to_4` `10_to_14` `15_to_19` `20_to_24` `25_to_29` `30_to_34`
@@ -637,41 +607,41 @@ Projected CRS: SVY21 / Singapore TM
 <h2 data-number="4.4" class="anchored" data-anchor-id="data-wrangling"><span class="header-section-number">4.4</span> Data wrangling</h2>
 <p>As with the previous exercises, it should be noted that columns may not always be in order, especially if they are sorted lexicographically. Hence, manual counting is sometimes requried to ensure the columns are in order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data_2023 <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span> <span class="ot">=</span> </span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>]) <span class="sc">+</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">14</span>])</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span> <span class="ot">=</span> </span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">7</span><span class="sc">:</span><span class="dv">13</span>]) <span class="sc">+</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">15</span>])</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AGED</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">16</span><span class="sc">:</span><span class="dv">21</span>])</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">21</span>])</span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">DEPENDENCY</span><span class="st">`</span> <span class="ot">=</span> (<span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">AGED</span><span class="st">`</span>) <span class="sc">/</span> <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span></span>
-<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">PA</span><span class="st">`</span>, <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>, <span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span>,</span>
-<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span>, <span class="st">`</span><span class="at">AGED</span><span class="st">`</span>, <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span>,</span>
-<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">DEPENDENCY</span><span class="st">`</span></span>
-<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>  population_data_2023,</span>
-<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
-<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data_2023 <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span> <span class="ot">=</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>]) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">14</span>])</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span> <span class="ot">=</span> </span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">7</span><span class="sc">:</span><span class="dv">13</span>]) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(.[<span class="dv">15</span>])</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">AGED</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">16</span><span class="sc">:</span><span class="dv">21</span>])</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(.[<span class="dv">3</span><span class="sc">:</span><span class="dv">21</span>])</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">DEPENDENCY</span><span class="st">`</span> <span class="ot">=</span> (<span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">AGED</span><span class="st">`</span>) <span class="sc">/</span> <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">PA</span><span class="st">`</span>, <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>, <span class="st">`</span><span class="at">YOUNG</span><span class="st">`</span>,</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span>, <span class="st">`</span><span class="at">AGED</span><span class="st">`</span>, <span class="st">`</span><span class="at">TOTAL</span><span class="st">`</span>,</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">DEPENDENCY</span><span class="st">`</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>  population_data_2023,</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 7
   PA         SZ                     YOUNG ECONOMY_ACTIVE  AGED TOTAL DEPENDENCY
@@ -682,26 +652,26 @@ Projected CRS: SVY21 / Singapore TM
 4 Ang Mo Kio Kebun Bahru             4320          12400  5640 22360      0.803
 5 Ang Mo Kio Sembawang Hills         1840           3670  1420  6930      0.888</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data_2023 <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">.vars =</span> <span class="fu">vars</span>(<span class="st">`</span><span class="at">PA</span><span class="st">`</span>, <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>),</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.funs =</span> <span class="fu">list</span>(toupper)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>population_data_2023_master_subzone_boundary_2019 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    master_plan_subzone_boundary_2019_shapefile,</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    population_data_2023,</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"SUBZONE_N"</span> <span class="ot">=</span> <span class="st">"SZ"</span>)</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  population_data_2023_master_subzone_boundary_2019,</span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>population_data_2023 <span class="ot">&lt;-</span> population_data_2023 <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">.vars =</span> <span class="fu">vars</span>(<span class="st">`</span><span class="at">PA</span><span class="st">`</span>, <span class="st">`</span><span class="at">SZ</span><span class="st">`</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.funs =</span> <span class="fu">list</span>(toupper)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ECONOMY_ACTIVE</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>population_data_2023_master_subzone_boundary_2019 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    master_plan_subzone_boundary_2019_shapefile,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    population_data_2023,</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"SUBZONE_N"</span> <span class="ot">=</span> <span class="st">"SZ"</span>)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  population_data_2023_master_subzone_boundary_2019,</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 5 features and 12 fields
 Geometry type: MULTIPOLYGON
